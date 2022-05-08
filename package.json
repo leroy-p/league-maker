@@ -1,6 +1,6 @@
 {
-  "name": "react-starter",
-  "version": "1.0.0",
+  "name": "league-maker",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@lingui/react": "3.13.3",
