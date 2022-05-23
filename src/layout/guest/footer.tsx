@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 function Footer() {
-  return <Container></Container>
+  return <SContainer></SContainer>
 }
 
 export default Footer
 
-const Container = styled.footer`
+const SContainer = styled.footer`
   width: 100%;
 `

@@ -1,0 +1,60 @@
+fragment FPlayer on Player {
+  uuid
+  name
+  matches1 {
+    uuid
+  }
+  matches2 {
+    uuid
+  }
+  won
+  loss
+  drawed
+  for
+  against
+}
+
+fragment FPlayerForLeaderboard on PlayerForLeaderboard {
+  uuid
+  name
+  won
+  loss
+  drawed
+  for
+  against
+  streak
+}
+
+query PlayerFindOne($findOneInput: PlayerFindOneInput!) {
+  playerOneMany(findOneInput: $findOneInput) {
+    ...FPlayer
+  }
+}
+
+query PlayerFindMany($findManyInput: PlayerFindManyInput!) {
+  playerFindMany(findManyInput: $findManyInput) {
+    ...FPlayer
+  }
+}
+
+query PlayerGetLeaderboard {
+  playerGetLeaderboard {
+    ...FPlayerForLeaderboard
+  }
+}
+
+mutation PlayerCreateOne($createInput: PlayerCreateInput!) {
+  playerCreateOne(createInput: $createInput) {
+    ...FPlayer
+  }
+}
+
+mutation PlayerUpdateOne($updateInput: PlayerUpdateInput!) {
+  playerUpdateOne(updateInput: $updateInput) {
+    ...FPlayer
+  }
+}
+
+mutation PlayerDeleteOne($deleteInput: PlayerDeleteInput!) {
+  playerDeleteOne(deleteInput: $deleteInput)
+}

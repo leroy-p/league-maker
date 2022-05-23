@@ -1,7 +1,7 @@
+import { Theme } from "@mui/material"
 import { createGlobalStyle } from "styled-components"
-import { ITheme } from "./context/theme/hook"
 
-const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
+const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,7 +14,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  color: ${({ theme }) => theme.palette.text.main};
+  color: ${({ theme }) => theme.palette.secondary.main};
   font-family: 'Roboto', sans-serif;
   letter-spacing: normal;
   line-height: normal;
@@ -26,6 +26,7 @@ p.error {
 }
 
 a {
+  color: ${({ theme }) => theme.palette.secondary.main};
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
   text-decoration: none;

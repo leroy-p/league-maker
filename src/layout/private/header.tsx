@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 function Header() {
-  return <Container></Container>
+  return <SContainer></SContainer>
 }
 
 export default Header
 
-const Container = styled.header`
+const SContainer = styled.header`
   width: 100%;
 `

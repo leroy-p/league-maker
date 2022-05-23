@@ -1,0 +1,1 @@
+/*eslint-disable*/export const messages={"loading.title":"loading.title","not-found.title":"not-found.title","ranking.title":"ranking.title","root.title":"root.title"};

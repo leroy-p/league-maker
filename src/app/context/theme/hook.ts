@@ -1,3 +1,4 @@
+import { createTheme, Theme } from "@mui/material"
 import { useState } from 'react'
 
 export enum ThemeMode {
@@ -5,30 +6,13 @@ export enum ThemeMode {
   DARK = 'dark',
 }
 
-export interface ITheme {
-  palette: {
-    primary: {
-      main: string
-    },
-    secondary: {
-      main: string
-    },
-    text: {
-      main: string
-    },
-    error: {
-      main: string
-    },  
-  }
-}
-
 export interface IThemeContextData {
   mode: ThemeMode
-  theme: ITheme
+  theme: Theme
   setMode: (value: ThemeMode) => void
 }
 
-export const defaultTheme: ITheme = {
+export const defaultTheme: Theme = createTheme({
   palette: {
     primary: {
       main: "#ffffff",
@@ -36,19 +20,15 @@ export const defaultTheme: ITheme = {
     secondary: {
       main: "#000000",
     },
-    text: {
-      main: "#000000",
-    },
     error: {
       main: "#ff0000",
     },  
   }
-}
-const lightTheme: ITheme = {
+})
+const lightTheme: Theme = {
   ...defaultTheme,
 }
-const darkTheme: ITheme = {
-  ...defaultTheme,
+const darkTheme: Theme = createTheme({
   palette: {
     ...defaultTheme.palette,
     primary: {
@@ -56,12 +36,9 @@ const darkTheme: ITheme = {
     },  
     secondary: {
       main: "#ffffff",
-    },  
-    text: {
-      main: "#ffffff",
-    },  
+    },
   }
-}
+})
 
 const themes = {
   [ThemeMode.LIGHT]: lightTheme,
@@ -70,7 +47,7 @@ const themes = {
 
 export function useThemeContext(defaultMode: ThemeMode): IThemeContextData {
   const [currentMode, setCurrentMode] = useState<ThemeMode>(defaultMode)
-  const [theme, setTheme] = useState<ITheme>(themes[defaultMode] || lightTheme)
+  const [theme, setTheme] = useState<Theme>(themes[defaultMode] || lightTheme)
 
   function setMode(mode: ThemeMode) {
     setCurrentMode(themes[mode] ? mode : currentMode)

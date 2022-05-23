@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { RoutePath } from './router-config'
 import Root from '../pages/public/root'
+import Ranking from '../pages/public/ranking'
+import Player from '../pages/public/player'
 import NotFound from '../pages/error/not-found'
 import Loading from '../pages/loading'
 
@@ -22,6 +24,16 @@ const routes: IRouteParams[] = [
   {
     Component: <Root />,
     path: RoutePath.ROOT,
+    type: RouteType.PUBLIC,
+  },
+  {
+    Component: <Ranking />,
+    path: RoutePath.RANKING,
+    type: RouteType.PUBLIC,
+  },
+  {
+    Component: <Player />,
+    path: RoutePath.PLAYER,
     type: RouteType.PUBLIC,
   },
 ]

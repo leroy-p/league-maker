@@ -6,11 +6,11 @@ interface IProps {
 }
 
 function Main({ children }: IProps) {
-  return <Container>{children}</Container>
+  return <SContainer>{children}</SContainer>
 }
 
 export default Main
 
-const Container = styled.main`
+const SContainer = styled.main`
   width: 100%;
 `

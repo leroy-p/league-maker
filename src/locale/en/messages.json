@@ -1,6 +1,8 @@
 {
   "loading.title": "Loading...",
   "not-found.title": "Not found",
-  "root.title": "Home",
+  "ranking.title": "Ranking",
+  "root.round": "Round",
+  "root.title": "Schedule",
   "{count, plural, =1 {language} other {languages}}": "Change {count, plural, =1 {language} other {languages}}"
 }
