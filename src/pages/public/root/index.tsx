@@ -20,8 +20,11 @@ function Root() {
       setMatches(result.matchGetCalendar)
     }
 
-    document.title = `${i18n._('root.title')} - League Maker`
     getMatches()
+  }, [])
+
+  useEffect(() => {
+    document.title = `${i18n._('root.title')} - League Maker`
   }, [i18n])
 
   if (matches.length === 0) return <Loading />
@@ -32,7 +35,7 @@ function Root() {
         <h2><Trans id="root.title" /></h2>
         <RoundSelector maxRound={matches.length} round={round} setRound={setRound} />
         <MatchesContainer>
-          {matches[round - 1] && matches[round].map((match) => <MatchRow key={match.uuid} match={match} />)}
+          {matches[round - 1] && matches[round - 1].map((match) => <MatchRow key={match.uuid} match={match} />)}
         </MatchesContainer>
       </SContainer>
     </Layout>
