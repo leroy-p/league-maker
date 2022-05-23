@@ -34,12 +34,12 @@ export default MatchRow
 
 const SContainer = styled.div`
   align-items: center;
-  border: ${({ theme }) => `solid 1px ${theme.palette.secondary.main}`};
+  border: ${({ theme }) => `solid 2px ${theme.palette.secondary.main}`};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 8px 0;
-  padding:  16px;
+  padding: 16px;
   width: 100%;
 `
 

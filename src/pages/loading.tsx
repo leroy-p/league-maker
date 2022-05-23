@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Trans } from '@lingui/react'
 import { CircularProgress } from '@mui/material';
 
 import Layout from '../layout/public'
@@ -22,9 +21,10 @@ const SContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: calc(100vh - 64px);
   width: 100%;
 
-  & > {
-    margin-top: 32px;
+  & > span {
+    margin-bottom: 64px;
   }
 `

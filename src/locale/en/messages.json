@@ -1,8 +1,17 @@
 {
-  "loading.title": "Loading...",
   "not-found.title": "Not found",
-  "ranking.title": "Ranking",
-  "root.round": "Round",
-  "root.title": "Schedule",
+  "ranking.column.against": "Against",
+  "ranking.column.diff": "Diff",
+  "ranking.column.for": "For",
+  "ranking.column.lost": "Lost",
+  "ranking.column.points": "Points",
+  "ranking.column.played": "Played",
+  "ranking.column.pts": "Pts",
+  "ranking.column.rank": "Rank",
+  "ranking.column.streak": "W/D/L",
+  "ranking.column.won": "Won",
+  "ranking.title": "Table",
+  "root.round": "Day",
+  "root.title": "Calendar",
   "{count, plural, =1 {language} other {languages}}": "Change {count, plural, =1 {language} other {languages}}"
 }
