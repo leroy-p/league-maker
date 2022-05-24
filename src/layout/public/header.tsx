@@ -53,7 +53,7 @@ const SContainer = styled.header`
   height: 64px;
   justify-content: space-between;
   margin-bottom: 16px;
-  padding: 0  8px;
+  padding: 0 24px;
   width: 100%;
 `
 

@@ -19,6 +19,7 @@ function TableRow({ player, smallScreen, index }: IProps) {
     points,
     played,
     won,
+    drawed,
     lost,
     against,
     streak
@@ -38,6 +39,7 @@ function TableRow({ player, smallScreen, index }: IProps) {
         <>
           <STd>{played}</STd>
           <STd>{won}</STd>
+          <STd>{drawed}</STd>
           <STd>{lost}</STd>
           <STd>{player.for}</STd>
           <STd>{against}</STd>

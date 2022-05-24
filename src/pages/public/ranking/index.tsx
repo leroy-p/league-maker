@@ -41,6 +41,7 @@ function Ranking() {
                 <>
                   <STh><Trans id="ranking.column.played" /></STh>
                   <STh><Trans id="ranking.column.won" /></STh>
+                  <STh><Trans id="ranking.column.drawed" /></STh>
                   <STh><Trans id="ranking.column.lost" /></STh>
                   <STh><Trans id="ranking.column.for" /></STh>
                   <STh><Trans id="ranking.column.against" /></STh>
@@ -68,7 +69,7 @@ const SContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px;
+  padding: 24px;
   width: 100%;
 
   & > h2 {

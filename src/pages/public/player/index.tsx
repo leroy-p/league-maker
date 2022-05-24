@@ -3,26 +3,39 @@ import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 
 import { IRoutePathParams, RoutePath } from '../../../app/router-config'
-import { graphqlClient, FPlayerFragment } from '../../../graphql'
+import { graphqlClient, FPlayerFragment, FMatchFragment } from '../../../graphql'
 import Layout from '../../../layout/public'
 import Loading from '../../loading'
 import NotFound from '../../error/not-found'
 import PlayerInformation from '../../../components/player-information'
 import MatchRow from '../../../components/match-row'
+import MatchInformation from '../../../components/match-information'
 
 function Player() {
   const { uuid } = useParams<IRoutePathParams[RoutePath.PLAYER]>()
   const [player, setPlayer] = useState<FPlayerFragment | null | undefined>(undefined)
+  const [selectedMatch, setSelectedMatch] = useState<FMatchFragment | null>(null)
   
   useEffect(() => {
-    async function getLeaderboard() {
+    async function getPlayer() {
       const result = await graphqlClient.PlayerFindOne({ input: { where: { uuid } } })
 
       setPlayer(result.playerFindOne || null)
     }
 
-    getLeaderboard()
-  }, [uuid])
+    getPlayer()
+    setSelectedMatch(null)
+  }, [uuid, setSelectedMatch])
+
+  async function updateScore(matchUuid: string, score1: number, score2: number) {
+    setPlayer(undefined)
+
+    await graphqlClient.MatchUpdateScore({ input: { uuid: matchUuid, score1, score2 }})
+    const result = await graphqlClient.PlayerFindOne({ input: { where: { uuid } } })
+
+    setPlayer(result.playerFindOne || null)
+    setSelectedMatch(null)
+  }
 
   if (player === undefined) return <Loading />
 
@@ -33,8 +46,9 @@ function Player() {
       <SContainer>
         <PlayerInformation player={player} />
         <MatchesContainer>
-          {player.matches && player.matches.map((match) => <MatchRow key={match.uuid} match={match} />)}
+          {player.matches && player.matches.map((match) => <MatchRow key={match.uuid} match={match} setSelectedMatch={setSelectedMatch} />)}
         </MatchesContainer>
+        {selectedMatch && <MatchInformation close={() => setSelectedMatch(null)} match={selectedMatch} updateScore={updateScore} />}
       </SContainer>
     </Layout>
   )
@@ -47,7 +61,7 @@ const SContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px;
+  padding: 24px;
   width: 100%;
 `
 

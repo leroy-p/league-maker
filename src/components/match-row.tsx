@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import { generateRoutePath, RoutePath } from '../app/router-config';
 
@@ -7,24 +7,39 @@ import { FMatchFragment } from '../graphql';
 
 interface IProps {
   match: FMatchFragment
+  setSelectedMatch?: (value: FMatchFragment) => void
 }
 
-function MatchRow({ match }: IProps) {
+function MatchRow({ match, setSelectedMatch }: IProps) {
+  const navigate = useNavigate()
   const { player1, player2, score1, score2 } = match
   const isMatchPlayed = score1 !== null && score2 !== null && score1 !== undefined && score2 !== undefined
 
+  function onLinkClicked(event: React.MouseEvent,playerUuid: string) {
+    event.stopPropagation()
+    navigate(generateRoutePath(RoutePath.PLAYER, { uuid: playerUuid }))
+  }
+
   return (
-    <SContainer>
-      <SPlayerContainer first winner={isMatchPlayed && score1 > score2}>
-        {player1 && <Link to={generateRoutePath(RoutePath.PLAYER, { uuid: player1.uuid })}>{`${player1.name} (${player1.rank})`}</Link>}
+    <SContainer onClick={setSelectedMatch ? () => setSelectedMatch(match) : undefined}>
+      <SPlayerContainer first>
+        {player1 && (
+          <SLink onClick={(event) => onLinkClicked(event, player1.uuid)} winner={isMatchPlayed && score1 > score2}>
+            {`${player1.name} (${player1.rank})`}
+          </SLink>
+        )}
       </SPlayerContainer>
       <SScoreContainer>
         {isMatchPlayed && <SScoreText winner={score1 > score2}>{score1}</SScoreText>}
         <p>-</p>
         {isMatchPlayed && <SScoreText winner={score1 < score2}>{score2}</SScoreText>}
       </SScoreContainer>
-      <SPlayerContainer winner={isMatchPlayed && score1 < score2}>
-        {player2 && <Link to={generateRoutePath(RoutePath.PLAYER, { uuid: player2.uuid })}>{`${player2.name} (${player2.rank})`}</Link>}
+      <SPlayerContainer>
+        {player2 && (
+          <SLink onClick={(event) => onLinkClicked(event, player2.uuid)} winner={isMatchPlayed && score1 < score2}>
+            {`${player2.name} (${player2.rank})`}
+          </SLink>
+        )}
       </SPlayerContainer>
     </SContainer>
   )
@@ -35,6 +50,7 @@ export default MatchRow
 const SContainer = styled.div`
   align-items: center;
   border: ${({ theme }) => `solid 2px ${theme.palette.secondary.main}`};
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -49,13 +65,14 @@ const SPlayerContainer = styled.div<{ first?: boolean; winner?: boolean }>`
   flex-direction: row;
   justify-content: ${({ first }) => (first ? 'flex-start' : 'flex-end')};
   width: calc(50% - 48px);
+`
 
-  & > a {
-    font-weight: ${({ winner }) => (winner ? 'bold' : 'normal')};
+const SLink = styled.p<{ winner?: boolean }>`
+  cursor: pointer;
+  font-weight: ${({ winner }) => (winner ? 'bold' : 'normal')};
 
-    :hover {
-      opacity: 0.7;
-    }
+  :hover {
+    opacity: 0.7;
   }
 `
 
