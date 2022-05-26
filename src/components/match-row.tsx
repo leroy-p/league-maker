@@ -49,6 +49,7 @@ export default MatchRow
 
 const SContainer = styled.div`
   align-items: center;
+  background-color: ${({ theme }) => theme.palette.primary.main};
   border: ${({ theme }) => `solid 2px ${theme.palette.secondary.main}`};
   cursor: pointer;
   display: flex;
@@ -56,7 +57,12 @@ const SContainer = styled.div`
   justify-content: space-between;
   margin: 8px 0;
   padding: 16px;
+  transition: all 200ms ease-in-out;
   width: 100%;
+
+  :hover {
+    transform: scale(1.02, 1.1);
+  }
 `
 
 const SPlayerContainer = styled.div<{ first?: boolean; winner?: boolean }>`

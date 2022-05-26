@@ -13,6 +13,6 @@
   "ranking.column.won": "Gagnés",
   "ranking.title": "Classement",
   "root.round": "Journée",
-  "root.title": "Calendrier",
+  "root.title": "Résultats",
   "{count, plural, =1 {language} other {languages}}": "Changer de {count, plural, =1 {langue} other {langues}}"
 }

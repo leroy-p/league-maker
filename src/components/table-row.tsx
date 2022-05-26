@@ -74,7 +74,7 @@ const SContainer = styled.tr<{ index: number }>`
 
 const STd = styled.td`
   border: none;
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.text.primary};
   padding: 0 8px;
 `
 
@@ -84,7 +84,7 @@ const SNameTd = styled.td`
   text-align: left;
 
   & > a {
-    color: ${({ theme }) => theme.palette.secondary.main};
+    color: ${({ theme }) => theme.palette.text.primary};
 
     :hover {
       opacity: 0.7;

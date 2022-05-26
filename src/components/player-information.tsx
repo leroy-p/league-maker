@@ -71,6 +71,7 @@ export default PlayerInformation
 
 const SContainer = styled.div`
   align-items: flex-start;
+  background-color: ${({ theme }) => theme.palette.primary.main};
   border: ${({ theme }) => `solid 2px ${theme.palette.secondary.main}`};
   display: flex;
   flex-direction: column;

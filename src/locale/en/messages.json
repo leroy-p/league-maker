@@ -13,6 +13,6 @@
   "ranking.column.won": "Won",
   "ranking.title": "Table",
   "root.round": "Day",
-  "root.title": "Calendar",
+  "root.title": "Results",
   "{count, plural, =1 {language} other {languages}}": "Change {count, plural, =1 {language} other {languages}}"
 }

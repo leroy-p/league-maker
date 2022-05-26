@@ -10,6 +10,7 @@ import NotFound from '../../error/not-found'
 import PlayerInformation from '../../../components/player-information'
 import MatchRow from '../../../components/match-row'
 import MatchInformation from '../../../components/match-information'
+import { useLingui } from '@lingui/react'
 
 function Player() {
   const { uuid } = useParams<IRoutePathParams[RoutePath.PLAYER]>()
@@ -26,6 +27,11 @@ function Player() {
     getPlayer()
     setSelectedMatch(null)
   }, [uuid, setSelectedMatch])
+
+
+  useEffect(() => {
+    if (player) document.title = `${player.name} - League Maker`
+  }, [player])
 
   async function updateScore(matchUuid: string, score1: number, score2: number) {
     setPlayer(undefined)
@@ -63,6 +69,10 @@ const SContainer = styled.div`
   justify-content: center;
   padding: 24px;
   width: 100%;
+
+  @media screen and (max-width: 800px) {
+    padding: 16px;
+  }
 `
 
 const MatchesContainer = styled.div`

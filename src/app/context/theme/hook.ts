@@ -1,9 +1,21 @@
 import { createTheme, Theme } from "@mui/material"
 import { useState } from 'react'
+import { 
+  lightTheme,
+  darkTheme,
+  redTheme,
+  greenTheme,
+  blueTheme,
+  pinkTheme,
+} from "./content/"
 
 export enum ThemeMode {
   LIGHT = 'light',
   DARK = 'dark',
+  RED = 'red',
+  GREEN = 'green',
+  BLUE = 'blue',
+  PINK = 'pink',
 }
 
 export interface IThemeContextData {
@@ -12,37 +24,15 @@ export interface IThemeContextData {
   setMode: (value: ThemeMode) => void
 }
 
-export const defaultTheme: Theme = createTheme({
-  palette: {
-    primary: {
-      main: "#ffffff",
-    },
-    secondary: {
-      main: "#000000",
-    },
-    error: {
-      main: "#ff0000",
-    },  
-  }
-})
-const lightTheme: Theme = {
-  ...defaultTheme,
-}
-const darkTheme: Theme = createTheme({
-  palette: {
-    ...defaultTheme.palette,
-    primary: {
-      main: "#000000",
-    },  
-    secondary: {
-      main: "#ffffff",
-    },
-  }
-})
+export const defaultTheme: Theme = { ... lightTheme}
 
 const themes = {
   [ThemeMode.LIGHT]: lightTheme,
   [ThemeMode.DARK]: darkTheme,
+  [ThemeMode.RED]: redTheme,
+  [ThemeMode.GREEN]: greenTheme,
+  [ThemeMode.BLUE]: blueTheme,
+  [ThemeMode.PINK]: pinkTheme,
 }
 
 export function useThemeContext(defaultMode: ThemeMode): IThemeContextData {

@@ -42,7 +42,7 @@ const SContainer = styled.div`
     width: 32px;
 
     & > svg {
-      fill: ${({ theme }) => theme.palette.secondary.main};
+      fill: ${({ theme }) => theme.palette.text.primary};
       height: 100%;
       width: 100%;
     }

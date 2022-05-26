@@ -14,7 +14,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.text.primary};
   font-family: 'Roboto', sans-serif;
   letter-spacing: normal;
   line-height: normal;
@@ -26,7 +26,7 @@ p.error {
 }
 
 a {
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.text.primary};
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
   text-decoration: none;

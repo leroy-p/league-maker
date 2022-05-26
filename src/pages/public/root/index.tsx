@@ -12,18 +12,22 @@ import MatchInformation from '../../../components/match-information'
 function Root() { 
   const { i18n } = useLingui()
   const [matches, setMatches] = useState<FMatchFragment[][]>([])
-  const [round, setRound] = useState<number>(1)
+  const [round, setRound] = useState<number>(0)
   const [selectedMatch, setSelectedMatch] = useState<FMatchFragment | null>(null)
 
   useEffect(() => {
     async function getMatches() {
-      const result = await graphqlClient.MatchGetCalendar()
+      const result = await graphqlClient.MatchGetResults()
 
-      setMatches(result.matchGetCalendar)
+      setMatches(result.matchGetResults)
     }
 
     getMatches()
   }, [])
+
+  useEffect(() => {
+    setRound(getRound())
+  }, matches)
 
   useEffect(() => {
     document.title = `${i18n._('root.title')} - League Maker`
@@ -33,13 +37,27 @@ function Root() {
     setMatches([])
 
     await graphqlClient.MatchUpdateScore({ input: { uuid: matchUuid, score1, score2 }})
-    const result = await graphqlClient.MatchGetCalendar()
+    const result = await graphqlClient.MatchGetResults()
 
-    setMatches(result.matchGetCalendar)
+    setMatches(result.matchGetResults)
     setSelectedMatch(null)
   }
 
-  if (matches.length === 0) return <Loading />
+  function getRound() {
+    if (matches.length === 0) return 0 
+
+    for (let i = matches.length; i > 0; i--) {
+      for (const match of matches[i - 1]) {
+        if (match.score1 && match.score2) {
+          return i
+        }
+      }
+    }
+
+    return 1
+  }
+
+  if (matches.length === 0 || round === 0) return <Loading />
 
   return (
     <Layout>
@@ -64,6 +82,10 @@ const SContainer = styled.div`
   justify-content: center;
   padding: 24px;
   width: 100%;
+
+  @media screen and (max-width: 800px) {
+    padding: 16px;
+  }
 
   & > h2 {
     font-weight: 24px;

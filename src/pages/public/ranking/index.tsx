@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Trans } from '@lingui/react'
+import { Trans, useLingui } from '@lingui/react'
 
 import { graphqlClient, FPlayerForLeaderboardFragment } from '../../../graphql'
 import Layout from '../../../layout/public'
 import TableRow from '../../../components/table-row'
 
 function Ranking() {
+  const { i18n } = useLingui()
   const [players, setPlayers] = useState<FPlayerForLeaderboardFragment[]>([])
 
   useEffect(() => {
@@ -18,6 +19,10 @@ function Ranking() {
 
     getLeaderboard()
   }, [])
+
+  useEffect(() => {
+    document.title = `${i18n._('ranking.title')} - League Maker`
+  }, [i18n])
 
   const smallScreen = window.innerWidth < 800
 
@@ -72,6 +77,10 @@ const SContainer = styled.div`
   padding: 24px;
   width: 100%;
 
+  @media screen and (max-width: 800px) {
+    padding: 16px;
+  }
+
   & > h2 {
     font-weight: 24px;
     margin-bottom: 32px;
@@ -107,7 +116,7 @@ const STr = styled.tr`
 
 const STh = styled.th`
   background-color: ${({ theme }) => theme.palette.primary.main};
-  color: ${({ theme }) => theme.palette.secondary.main};
+  color: ${({ theme }) => theme.palette.text.primary};
   padding: 8px;
   width: 100%;
 `

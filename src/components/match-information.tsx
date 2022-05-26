@@ -36,8 +36,10 @@ function MatchInformation({ match, close, updateScore }: IProps) {
   return (
     <Dialog close={close}>
       <SContainer onClick={(event) => event.stopPropagation()}>
-        <h6><Trans id="root.round" />{` ${round}`}</h6>
-        <div>
+        <STitleContainer>
+          <h6><Trans id="root.round" />{` ${round}`}</h6>
+        </STitleContainer>
+        <SMainContainer>
           {player1 && <Link to={generateRoutePath(RoutePath.PLAYER, { uuid: player1.uuid })}>{`${player1.name} (${player1.rank})`}</Link>}
           <SScoreContainer>
             {isMatchPlayed && !editMode && <SScoreText winner={score1 > score2}>{score1}</SScoreText>}
@@ -47,7 +49,7 @@ function MatchInformation({ match, close, updateScore }: IProps) {
             {editMode && <input type="number" onChange={(event) => handleChangeScore(parseInt(event.target.value), setNewScore2)} value={newScore2} />}
           </SScoreContainer>
           {player2 && <Link to={generateRoutePath(RoutePath.PLAYER, { uuid: player2.uuid })}>{`${player2.name} (${player2.rank})`}</Link>}
-        </div>
+        </SMainContainer>
         <SEditButton onClick={() => setEditMode(!editMode)}>
           {editMode ? <CancelIcon /> : <EditIcon />}
         </SEditButton>
@@ -70,34 +72,47 @@ const SContainer = styled.div`
   cursor: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 48px 24px;
+  height: 220px;
+  justify-content: flex-start;
+  padding: 24px;
   position: relative;
   width: 560px;
 
+  @media screen and (max-width: 800px) {
+    width: calc(100% - 32px);
+  }
+`
+
+const STitleContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 24px;
+  justify-content: center;
+
   &  > h6 {
     font-size: 18px;
-    margin-bottom: 32px;
+  }
+`
+
+const SMainContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 24px);
+  justify-content: center;
+  width: 100%;
+
+  & > a {
+    width: calc(50% - 64px);
+
+    :hover {
+      opacity: 0.7;
+    }
   }
 
-  & > div {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-
-    & > a {
-      width: calc(50% - 64px);
-
-      :hover {
-        opacity: 0.7;
-      }
-    }
-
-    & > a:nth-last-child(1) {
-      text-align: right;
-    }
+  & > a:nth-last-child(1) {
+    text-align: right;
   }
 `
 
@@ -115,7 +130,7 @@ const SScoreContainer = styled.div<{ first?: boolean }>`
   & > input {
     border: ${({ theme }) => `solid 1px ${theme.palette.secondary.main}`};
     background-color: ${({ theme }) => theme.palette.primary.main};
-    color: ${({ theme }) => theme.palette.secondary.main};
+    color: ${({ theme }) => theme.palette.text.primary};
     font-size: 16px;
     padding: 8px;
     width: 56px;
@@ -129,8 +144,8 @@ const SScoreText = styled.p<{ winner?: boolean }>`
 const SEditButton = styled.button`
   height: 24px;
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 24px;
+  top: 24px;
   width: 24px;
 
   :hover {
@@ -138,7 +153,7 @@ const SEditButton = styled.button`
   }
 
   & > svg {
-    fill: ${({ theme }) => theme.palette.secondary.main};
+    fill: ${({ theme }) => theme.palette.text.primary};
     height: 100%;
     width: 100%;
   }
@@ -147,8 +162,8 @@ const SEditButton = styled.button`
 const SSaveButton = styled.button`
   height: 24px;
   position: absolute;
-  right: 48px;
-  top: 16px;
+  right: 64px;
+  top: 24px;
   width: 24px;
 
   :hover {
@@ -156,7 +171,7 @@ const SSaveButton = styled.button`
   }
 
   & > svg {
-    fill: ${({ theme }) => theme.palette.secondary.main};
+    fill: ${({ theme }) => theme.palette.text.primary};
     height: 100%;
     width: 100%;
   }
